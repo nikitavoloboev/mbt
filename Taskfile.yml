@@ -8,13 +8,30 @@ vars:
 tasks:
   flow:
     desc: Run the MoonBit flow CLI (passes CLI args through).
+    silent: true
     cmds:
       - |
         set -euo pipefail
         moon run cli/flow -- {{.CLI_ARGS}}
 
-  publish:
+  default:
+    desc: List available tasks.
+    silent: true
+    cmds:
+      - |
+        task --list
+
+  dev:
+    desc: Alias for `task flow`.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        task flow -- {{.CLI_ARGS}}
+
+  deploy:
     desc: Build the MoonBit flow CLI and install it to ~/bin/flow.
+    silent: true
     cmds:
       - |
         set -euo pipefail
@@ -22,3 +39,19 @@ tasks:
         mkdir -p "{{.bin_dir}}"
         cp "{{.flow_native_path}}" "{{.bin_dir}}/{{.bin_name}}"
         chmod +x "{{.bin_dir}}/{{.bin_name}}"
+  setup:
+    desc: Ensure MoonBit CLI is installed and fetch project dependencies.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        if ! command -v moon >/dev/null 2>&1; then
+          echo "MoonBit CLI 'moon' not found in PATH."
+          echo "Install it with: curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash"
+          echo "See install docs: https://www.moonbitlang.com/download/"
+          exit 1
+        fi
+        # keep commands quiet but still fail fast on non-zero exit codes
+        moon version >/dev/null
+        moon install >/dev/null
+        echo "✔️ you are setup"
