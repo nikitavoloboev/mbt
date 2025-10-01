@@ -4,10 +4,6 @@
     {
       "path": "moonbitlang/x/sys",
       "alias": "sys"
-    },
-    {
-      "path": "nikitavoloboev/moonbit",
-      "alias": "lib"
     }
   ],
   "warn-list": "-1"

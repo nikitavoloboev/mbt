@@ -2,7 +2,6 @@
 package "nikitavoloboev/moonbit"
 
 // Values
-fn fib(Int) -> Int64
 
 // Errors
 

@@ -30,7 +30,7 @@ fn print_usage(program : String) -> Unit {
   println("  help                   Show this message")
   println("  version                Print the CLI version")
   println("  greet [name]           Print a friendly greeting")
-  println("  fib <n>                Compute nth Fibonacci number using lib.fib")
+  println("  fib <n>                Compute nth Fibonacci number")
 }
 
 ///|
@@ -56,7 +56,7 @@ fn handle_fib(program : String, args : Array[String]) -> Unit {
     println("\{program}: fibonacci index must be non-negative")
     @sys.exit(1)
   }
-  let result = @lib.fib(n)
+  let result = fib(n)
   println("fib(\{n}) = \{result}")
 }
 
@@ -93,4 +93,18 @@ fn parse_integer_or_exit(program : String, raw : String) -> Int {
   } else {
     value
   }
+}
+
+///|
+fn fib(n : Int) -> Int64 {
+  let mut i = 0
+  let mut a = 0L
+  let mut b = 1L
+  while i < n {
+    let next = a + b
+    a = b
+    b = next
+    i = i + 1
+  }
+  b
 }
