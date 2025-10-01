@@ -1,0 +1,24 @@
+version: "3"
+
+vars:
+  bin_dir: "{{.HOME}}/bin"
+  bin_name: "flow"
+  flow_native_path: "target/native/release/build/cli/flow/flow.exe"
+
+tasks:
+  flow:
+    desc: Run the MoonBit flow CLI (passes CLI args through).
+    cmds:
+      - |
+        set -euo pipefail
+        moon run cli/flow -- {{.CLI_ARGS}}
+
+  publish:
+    desc: Build the MoonBit flow CLI and install it to ~/bin/flow.
+    cmds:
+      - |
+        set -euo pipefail
+        moon run cli/flow --build-only --target native --release
+        mkdir -p "{{.bin_dir}}"
+        cp "{{.flow_native_path}}" "{{.bin_dir}}/{{.bin_name}}"
+        chmod +x "{{.bin_dir}}/{{.bin_name}}"

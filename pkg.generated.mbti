@@ -1,0 +1,14 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "nikitavoloboev/moonbit"
+
+// Values
+fn fib(Int) -> Int64
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
