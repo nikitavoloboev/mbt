@@ -8,9 +8,11 @@ Install [Task](https://taskfile.dev/docs/installation). Then run `task setup` & 
 
 Run `task` to see all possible commands.
 
-## Flow CLI
+## `flow` CLI
 
-[flow](https://github.com/nikitavoloboev/flow) repo explains purpose of flow well. See [cli/flow](cli/flow) for its code.
+`flow` is a CLI as a dump of various commands written in MoonBit that are useful to me. See [cli/flow](cli/flow) for its code/docs.
+
+Run `task deploy` to install `flow-mbt` into PATH. It also puts `fm` command in path (my own personal shorthand, but you can change it).
 
 ## Contributing
 
