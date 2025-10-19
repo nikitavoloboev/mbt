@@ -3,6 +3,7 @@ version: "3"
 vars:
   bin_dir: "{{.HOME}}/bin"
   bin_name: "flow"
+  alias_name: "fa"
   flow_native_path: "target/native/release/build/cli/flow/flow.exe"
 
 tasks:
@@ -30,7 +31,7 @@ tasks:
         task flow -- {{.CLI_ARGS}}
 
   deploy:
-    desc: Build the MoonBit flow CLI and install it to ~/bin/flow.
+    desc: Build the MoonBit flow CLI and install it to ~/bin/flow (with optional fa alias).
     silent: true
     cmds:
       - |
@@ -39,6 +40,17 @@ tasks:
         mkdir -p "{{.bin_dir}}"
         cp "{{.flow_native_path}}" "{{.bin_dir}}/{{.bin_name}}"
         chmod +x "{{.bin_dir}}/{{.bin_name}}"
+        if [ -n "{{.alias_name}}" ]; then
+          ln -sf "{{.bin_dir}}/{{.bin_name}}" "{{.bin_dir}}/{{.alias_name}}"
+        fi
+        case ":${PATH}:" in
+          *:"{{.bin_dir}}":*) ;;
+          *)
+            echo "Note: {{.bin_dir}} is not currently on PATH."
+            echo "Add it for fish with: fish_add_path $HOME/bin"
+            echo "Or for bash/zsh: export PATH=\"$HOME/bin:$PATH\""
+            ;;
+        esac
   setup:
     desc: Ensure MoonBit CLI is installed and fetch project dependencies.
     silent: true

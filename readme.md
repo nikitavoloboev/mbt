@@ -13,6 +13,7 @@ Run `task` to see all possible commands.
 `flow` is a CLI as a dump of various commands written in MoonBit that are useful to me. See [cli/flow](cli/flow) for its code/docs.
 
 Run `task deploy` to install `flow-mbt` into PATH. It also puts `fm` command in path (my own personal shorthand, but you can change it).
+Once `fm` is on PATH, running it without arguments opens an `fzf`-powered palette so you can fuzzy search available commands before executing them (make sure [`fzf`](https://github.com/junegunn/fzf) is installed).
 
 ## Contributing
 

@@ -6,5 +6,8 @@
       "alias": "sys"
     }
   ],
-  "warn-list": "-1"
+  "warn-list": "-1",
+  "native-stub": [
+    "exit_stub.c"
+  ]
 }
